@@ -7,29 +7,37 @@ import "./Shop.css";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-
-
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     fetch("./fakeData/products.JSON")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
+        setFilteredProducts(data);
       });
   }, []);
 
   const handleAddToCart = (item) => {
     const newCart = [...cart, item];
     setCart(newCart);
-   
   };
 
+  const handleSearch = (event) => {
+    const searchText = event.target.value;
+    const matchedProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredProducts(matchedProducts);
+  };
+  
   return (
     <div>
       <Header></Header>
       <div className="search py-3 d-flex justify-content-center align-items-center">
         <input
           type="text"
+          onChange={handleSearch}
           className="w-75 mx-2"
           placeholder="Type Here To Search"
         />
@@ -39,7 +47,7 @@ const Shop = () => {
       <div className="container">
         <Row>
           <Col md={9}>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Product
                 product={product}
                 key={product.key}

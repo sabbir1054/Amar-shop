@@ -1,7 +1,6 @@
 import React from "react";
 
 const Cart = (props) => {
-  console.log(props.cart);
   const { cart } = props;
   let total = 0;
   for (const product of cart) {
@@ -17,7 +16,7 @@ const Cart = (props) => {
     tax = total * (10 / 100);
   }
   let shipping = 0;
-  if (cart.length==0) {
+  if (cart.length===0) {
     shipping = 0;
   }
   else if (cart.length <= 5) {
