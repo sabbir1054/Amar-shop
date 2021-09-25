@@ -1,7 +1,7 @@
 import React from "react";
 import "./Product.css";
 const Product = (props) => {
-  console.log(props.product);
+  console.log(props);
   const {
     key,
     name,
@@ -32,7 +32,10 @@ const Product = (props) => {
             <p className="mx-auto">Stocks: {stock}</p>
           </div>
           <div className="d-flex justify-content-center">
-            <button className=" btn btn-warning">
+            <button
+              className=" btn btn-warning"
+              onClick={()=>props.handleAddToCart(props.product)}
+            >
               <i className="me-2 fas fa-shopping-cart"></i>
               Add to Cart
             </button>
