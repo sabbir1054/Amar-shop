@@ -6,6 +6,9 @@ import Product from "../Product/Product";
 import "./Shop.css";
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+
 
   useEffect(() => {
     fetch("./fakeData/products.JSON")
@@ -16,7 +19,9 @@ const Shop = () => {
   }, []);
 
   const handleAddToCart = (item) => {
-    console.log(item);
+    const newCart = [...cart, item];
+    setCart(newCart);
+   
   };
 
   return (
@@ -29,7 +34,7 @@ const Shop = () => {
           placeholder="Type Here To Search"
         />
         <i className="fas fa-shopping-cart cart"></i>
-        <h4 className="text-warning ms-2">0</h4>
+        <h4 className="text-warning ms-2">{cart.length}</h4>
       </div>
       <div className="container">
         <Row>
@@ -43,7 +48,7 @@ const Shop = () => {
             ))}
           </Col>
           <Col md={3}>
-            <Cart></Cart>
+            <Cart cart={cart}></Cart>
           </Col>
         </Row>
       </div>

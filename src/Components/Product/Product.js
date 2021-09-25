@@ -1,7 +1,7 @@
 import React from "react";
 import "./Product.css";
 const Product = (props) => {
-  console.log(props);
+  // console.log(props);
   const {
     key,
     name,
