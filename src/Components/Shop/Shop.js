@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { addToDb } from "../../utilities/fakeDb";
 import Cart from "../Cart/Cart";
 import Header from "../Header/Header";
 import Product from "../Product/Product";
@@ -21,6 +22,9 @@ const Shop = () => {
   const handleAddToCart = (item) => {
     const newCart = [...cart, item];
     setCart(newCart);
+//add to local storage
+    addToDb(item.key);
+    
   };
 
   const handleSearch = (event) => {
@@ -55,7 +59,7 @@ const Shop = () => {
               />
             ))}
           </Col>
-          <Col md={3}>
+          <Col md={3} className="d-none d-md-block">
             <Cart cart={cart}></Cart>
           </Col>
         </Row>

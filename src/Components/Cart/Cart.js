@@ -27,16 +27,41 @@ const Cart = (props) => {
     shipping = 40;
   }
   let totalCost = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
+
+ /*  const resetCart = () => {
+    const texts = document.getElementsByClassName('cart-text');
+    texts.forEach(element => {
+      console.log(element);
+    });
+  } */
     return (
       <div>
-        <h3>Order Summery</h3><br />
-        <h5>Items ordered: {props.cart.length}</h5><br />
-        <h5>Total Product Price:{total}</h5>
-        <h5>Tax:{tax.toFixed(2)}</h5>
-        <h5>Shipping Cost:{shipping.toFixed(2)}</h5><br />
-        <h4 className='text-danger'>Total cost:{totalCost.toFixed(2)}</h4>
-        <button className="btn btn-primary text-white px-3 me-3">Order Review</button>
-        <button className="btn btn-success text-white px-3 me-3">Order Now</button>
+        <h3>Order Summery</h3>
+        <br />
+        <h5>
+          Items ordered: <span className='cart-text'>{props.cart.length}</span>{" "}
+        </h5>
+        <br />
+        <h5>
+          Total Product Price: <span className='cart-text'>{total}</span>{" "}
+        </h5>
+        <h5>
+          Tax: <span className='cart-text'>{tax.toFixed(2)}</span>{" "}
+        </h5>
+        <h5>
+          Shipping Cost: <span className='cart-text'>{shipping.toFixed(2)}</span>
+        </h5>
+        <br />
+        <h4 className="text-danger">Total cost:{totalCost.toFixed(2)}</h4>
+        <button className="btn btn-primary text-white px-3 me-2">
+          Order Review
+        </button>
+        <button
+          
+          className="btn btn-success text-white px-3 "
+        >
+          Place Order
+        </button>
       </div>
     );
 };
