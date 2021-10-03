@@ -17,10 +17,10 @@ const Product = (props) => {
   return (
     <>
       <Row className="bg-light py-2 d-flex product">
-        <Col md={6}>
+        <Col lg={3}>
           <img src={img} alt="" />
         </Col>
-        <Col md={6}>
+        <Col lg={9}>
           <div className="info ms-2 ">
             <h5>{name}</h5>
             <div className="d-flex">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { addToDb } from "../../utilities/fakeDb";
+import { addToDb, getStoredCart } from "../../utilities/fakeDb";
 import Cart from "../Cart/Cart";
 import Header from "../Header/Header";
 import Product from "../Product/Product";
@@ -9,7 +9,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+ 
   useEffect(() => {
     fetch("./fakeData/products.JSON")
       .then((res) => res.json())
@@ -19,12 +19,25 @@ const Shop = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (products.length) {
+      const savedCart = getStoredCart();
+      const storedCart = [];
+      for (const key in savedCart) {
+        const savedProduct = products.find((product) => product.key === key);
+        const quantity = savedCart[key];
+        savedProduct.quantity = quantity;
+        storedCart.push(savedProduct);
+      }
+      setCart(storedCart);
+    }
+  }, [products]);
+ 
   const handleAddToCart = (item) => {
     const newCart = [...cart, item];
     setCart(newCart);
-//add to local storage
+    //add to local storage
     addToDb(item.key);
-    
   };
 
   const handleSearch = (event) => {
@@ -34,10 +47,9 @@ const Shop = () => {
     );
     setFilteredProducts(matchedProducts);
   };
-  
+
   return (
     <div>
-      <Header></Header>
       <div className="search py-3 d-flex justify-content-center align-items-center">
         <input
           type="text"
